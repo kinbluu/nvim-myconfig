@@ -1,12 +1,12 @@
-require("base46").load_all_highlights()
+-- require("base46").load_all_highlights()
 
-require("nvchad")
-
-vim.keymap.set("n", "<leader>tt", function()
-	require("nvchad.themes").open({
-		style = "compact",
-	})
-end)
+-- require("nvchad")
+--
+-- vim.keymap.set("n", "<leader>tt", function()
+-- 	require("nvchad.themes").open({
+-- 		style = "compact",
+-- 	})
+-- end)
 
 if require("nvconfig").ui.tabufline.enabled then
 	vim.keymap.set("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })

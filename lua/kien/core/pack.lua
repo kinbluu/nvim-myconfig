@@ -16,7 +16,7 @@ require("kien.plugins.conform-format")
 require("kien.plugins.noice")
 require("kien.plugins.colorizer")
 
--- require("kien.plugins.nvchad")
+require("kien.plugins.nvchad")
 
 require("kien.plugins.tiny-diagnostic")
 
