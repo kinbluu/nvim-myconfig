@@ -10,6 +10,3 @@ require("vim._core.ui2").enable({
 })
 
 require("kien.core")
-
-require("kien.plugins.tokyonight")
-require("kien.plugins.nvchad-ui")
