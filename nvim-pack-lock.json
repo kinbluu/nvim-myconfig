@@ -1,5 +1,10 @@
 {
   "plugins": {
+    "base46": {
+      "rev": "d870ec89a7b2f28c4accce515f97b7bcc5b9d200",
+      "src": "https://github.com/NvChad/base46",
+      "version": "'v3.0'"
+    },
     "blink.cmp": {
       "rev": "b02ac65634bdb8af2dcc4eb6c807c060e1e15ae6",
       "src": "https://github.com/saghen/blink.cmp"
@@ -113,6 +118,11 @@
     "triforce.nvim": {
       "rev": "2e7ff7e2e89021fdb5435f3d3a75e875b24bdaa4",
       "src": "https://github.com/gisketch/triforce.nvim"
+    },
+    "ui": {
+      "rev": "efb7edef6789548fd02ac88b8d47b3e344031c53",
+      "src": "https://github.com/NvChad/ui",
+      "version": "'v3.0'"
     },
     "volt": {
       "rev": "4351c5cd790a0d39491c4d5c75dd62d7db3d3414",

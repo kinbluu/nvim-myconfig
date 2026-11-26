@@ -20,6 +20,8 @@ return {
 	gh("folke/noice.nvim"),
 	gh("lewis6991/gitsigns.nvim"),
 	gh("NvChad/nvim-colorizer.lua"),
+	{ src = gh("NvChad/ui"), version = "v3.0" },
+	{ src = gh("NvChad/base46"), version = "v3.0" },
 	gh("nvzone/showkeys"),
 	gh("rachartier/tiny-inline-diagnostic.nvim"),
 	gh("shellRaining/hlchunk.nvim"),
