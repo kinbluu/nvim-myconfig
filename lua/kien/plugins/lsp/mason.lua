@@ -18,6 +18,7 @@ mason_lspconfig.setup({
 		"vtsls",
 		"html",
 		"cssls",
+		"jsonls",
 		"gopls",
 	},
 })
