@@ -20,10 +20,6 @@ mason_lspconfig.setup({
 		"html",
 		"cssls",
 		"gopls",
-		"tailwindcss",
-		"emmet_ls",
-		"emmet_language_server",
-		"pyright",
 	},
 })
 

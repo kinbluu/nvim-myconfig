@@ -15,15 +15,9 @@ blink.setup({
 				components = {
 					kind_icon = {
 						text = function(ctx)
-							if ctx.source_name == "blade-nav" then
-								return " "
-							end
 							return ctx.kind_icon
 						end,
 						highlight = function(ctx)
-							if ctx.source_name == "blade-nav" then
-								return "BlinkCmpKindBladeNav"
-							end
 							return "BlinkCmpKind" .. ctx.kind
 						end,
 					},
@@ -54,16 +48,12 @@ blink.setup({
 	},
 
 	sources = {
-		default = { "lsp", "blade-nav", "path", "buffer", "snippets" },
+		default = { "lsp", "path", "buffer", "snippets" },
 		providers = {
 			lsp = {
 				opts = {
 					tailwind_color_icon = "󱓻",
 				},
-			},
-			["blade-nav"] = {
-				name = "blade-nav",
-				module = "blade-nav.integrations.blink",
 			},
 		},
 	},
