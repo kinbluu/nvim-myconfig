@@ -43,4 +43,6 @@ return {
 	{ src = gh("slowy07/mywpm.nvim") },
 
 	{ src = gh("gisketch/triforce.nvim") },
+
+	{ src = gh("folke/tokyonight.nvim") },
 }

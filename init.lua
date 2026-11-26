@@ -11,3 +11,5 @@ require("vim._core.ui2").enable({
 
 require("kien.configs")
 require("kien.core")
+
+vim.cmd.colorscheme("tokyonight")

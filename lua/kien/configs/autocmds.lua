@@ -35,3 +35,10 @@ vim.api.nvim_create_user_command("TSInstallAll", function()
 	local opts = type(spec.opts) == "table" and spec.opts or {}
 	require("nvim-treesitter").install(opts.ensure_installed)
 end, {})
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = vim.api.nvim_create_augroup("ryoku-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank({ timeout = 180 })
+	end,
+})

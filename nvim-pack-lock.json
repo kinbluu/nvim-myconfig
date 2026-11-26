@@ -1,13 +1,5 @@
 {
   "plugins": {
-    "WallSync": {
-      "rev": "435a15a95eab3d6b1c25dce576dab011ab2703c3",
-      "src": "https://github.com/NvChad/WallSync"
-    },
-    "base46": {
-      "rev": "884b990dcdbe07520a0892da6ba3e8d202b46337",
-      "src": "https://github.com/nvchad/base46"
-    },
     "blink.cmp": {
       "rev": "b02ac65634bdb8af2dcc4eb6c807c060e1e15ae6",
       "src": "https://github.com/saghen/blink.cmp"
@@ -93,10 +85,6 @@
       "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
-    "phptools.nvim": {
-      "rev": "34ea0b46b19849f041b514a4770669e6d0e95224",
-      "src": "https://github.com/ccaglak/phptools.nvim"
-    },
     "plenary.nvim": {
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
@@ -117,17 +105,13 @@
       "rev": "e930d0a46031645040d5492595b46cdf6ab3514f",
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
+    "tokyonight.nvim": {
+      "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
+      "src": "https://github.com/folke/tokyonight.nvim"
+    },
     "triforce.nvim": {
       "rev": "2e7ff7e2e89021fdb5435f3d3a75e875b24bdaa4",
       "src": "https://github.com/gisketch/triforce.nvim"
-    },
-    "ui": {
-      "rev": "3e67e9d5325fd47fdbc90ca00a147db2f3525754",
-      "src": "https://github.com/nvchad/ui"
-    },
-    "volt": {
-      "rev": "620de1321f275ec9d80028c68d1b88b409c0c8b1",
-      "src": "https://github.com/nvchad/volt"
     }
   }
 }

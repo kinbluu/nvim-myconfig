@@ -37,9 +37,9 @@ vim.opt.signcolumn = "yes"
 vim.o.cmdheight = 0
 vim.opt.termguicolors = true
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Hightlight when yank copying text",
-	callback = function()
-		vim.hl.on_yank()
-	end,
-})
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+-- 	desc = "Hightlight when yank copying text",
+-- 	callback = function()
+-- 		vim.hl.on_yank()
+-- 	end,
+-- })
