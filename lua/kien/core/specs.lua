@@ -1,48 +1,35 @@
-local gh = function(repo)
+local function gh(repo)
 	return "https://github.com/" .. repo
 end
 
 return {
-	{ src = gh("folke/snacks.nvim") },
-
-	{ src = gh("saghen/blink.lib") },
-	{ src = gh("saghen/blink.cmp") },
-
-	{ src = gh("nvim-treesitter/nvim-treesitter"), branch = "main" },
-
-	{ src = gh("windwp/nvim-autopairs") },
-
-	{ src = gh("stevearc/conform.nvim") },
-	{ src = gh("nvim-lua/plenary.nvim") },
-	{ src = gh("nvim-tree/nvim-web-devicons") },
-	{ src = gh("nvim-lualine/lualine.nvim") },
-
-	{ src = gh("neovim/nvim-lspconfig") },
-	{ src = gh("mason-org/mason.nvim") },
-	{ src = gh("mason-org/mason-lspconfig.nvim") },
-	{ src = gh("WhoIsSethDaniel/mason-tool-installer.nvim") },
-
-	{ src = gh("folke/noice.nvim") },
-	{ src = gh("MunifTanjim/nui.nvim") },
-
-	{ src = gh("lewis6991/gitsigns.nvim") },
-
-	{ src = gh("NvChad/nvim-colorizer.lua") },
-
-	{ src = gh("nvzone/showkeys") },
-	{ src = gh("rachartier/tiny-inline-diagnostic.nvim") },
-	{ src = gh("shellRaining/hlchunk.nvim") },
-	{ src = gh("nvzone/floaterm") },
-
-	{ src = gh("folke/lazydev.nvim") },
+	gh("folke/snacks.nvim"),
+	gh("saghen/blink.lib"),
+	gh("saghen/blink.cmp"),
+	{ src = gh("nvim-treesitter/nvim-treesitter"), version = "main" },
+	gh("windwp/nvim-autopairs"),
+	gh("stevearc/conform.nvim"),
+	gh("nvim-lua/plenary.nvim"),
+	gh("nvim-tree/nvim-web-devicons"),
+	gh("nvim-lualine/lualine.nvim"),
+	gh("neovim/nvim-lspconfig"),
+	gh("mason-org/mason.nvim"),
+	gh("mason-org/mason-lspconfig.nvim"),
+	gh("WhoIsSethDaniel/mason-tool-installer.nvim"),
+	gh("MunifTanjim/nui.nvim"),
+	gh("folke/noice.nvim"),
+	gh("lewis6991/gitsigns.nvim"),
+	gh("NvChad/nvim-colorizer.lua"),
+	gh("nvzone/showkeys"),
+	gh("rachartier/tiny-inline-diagnostic.nvim"),
+	gh("shellRaining/hlchunk.nvim"),
+	gh("nvzone/volt"),
+	gh("nvzone/floaterm"),
+	gh("folke/lazydev.nvim"),
 	{ src = gh("kylechui/nvim-surround"), version = vim.version.range("4.x") },
-
-	{ src = gh("kevinhwang91/promise-async") },
-	{ src = gh("nvim-neotest/nvim-nio") },
-
-	{ src = gh("slowy07/mywpm.nvim") },
-
-	{ src = gh("gisketch/triforce.nvim") },
-
-	{ src = gh("folke/tokyonight.nvim") },
+	gh("kevinhwang91/promise-async"),
+	gh("nvim-neotest/nvim-nio"),
+	gh("slowy07/mywpm.nvim"),
+	gh("gisketch/triforce.nvim"),
+	gh("folke/tokyonight.nvim"),
 }

@@ -13,7 +13,6 @@ mason.setup({
 })
 
 mason_lspconfig.setup({
-	automatic_enable = true, -- set true to enable all LSP in `ensure_installed`
 	ensure_installed = {
 		"lua_ls",
 		"vtsls",

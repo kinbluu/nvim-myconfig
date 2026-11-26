@@ -1,62 +1,40 @@
+local picker = require("snacks").picker
+
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-	callback = function(ev)
-		-- Buffer local mappings
-		local opts = { buffer = ev.buf, silent = true }
-		-- Keymaps
-		opts.desc = "Show LSP references"
-		vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts)
+	group = vim.api.nvim_create_augroup("KienLsp", { clear = true }),
+	desc = "Set buffer-local LSP keymaps",
+	callback = function(args)
+		local function map(mode, lhs, rhs, desc)
+			vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, silent = true, desc = desc })
+		end
 
-		opts.desc = "Go to declaration"
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-
-		opts.desc = "Show LSP definitions"
-		vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-
-		opts.desc = "Show LSP implementations"
-		vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
-
-		opts.desc = "Show LSP type definitions"
-		vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
-
-		opts.desc = "See available code actions"
-		vim.keymap.set({ "n", "v" }, "<leader>vca", function()
-			vim.lsp.buf.code_action()
-		end, opts)
-
-		opts.desc = "Smart rename"
-		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-
-		opts.desc = "Show buffer diagnostics"
-		vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
-
-		opts.desc = "Show line diagnostics"
-		vim.keymap.set("n", "df", vim.diagnostic.open_float, opts)
-
-		opts.desc = "Signature Help"
-		vim.keymap.set("i", "<C-h>", function()
-			vim.lsp.buf.signature_help()
-		end, opts)
-
-		opts.desc = "Show documentation for what is under cursor"
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-
-		opts.desc = "Restart LSP"
-		vim.keymap.set("n", "<leader>rs", ":lsp restart<CR>", opts)
+		map("n", "gR", picker.lsp_references, "Show LSP references")
+		map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+		map("n", "gd", picker.lsp_definitions, "Show LSP definitions")
+		map("n", "gi", picker.lsp_implementations, "Show LSP implementations")
+		map("n", "gt", picker.lsp_type_definitions, "Show LSP type definitions")
+		map({ "n", "v" }, "<leader>vca", vim.lsp.buf.code_action, "Show code actions")
+		map("n", "<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+		map("n", "<leader>D", picker.diagnostics_buffer, "Show buffer diagnostics")
+		map("n", "df", vim.diagnostic.open_float, "Show line diagnostics")
+		map("i", "<C-h>", vim.lsp.buf.signature_help, "Show signature help")
+		map("n", "K", vim.lsp.buf.hover, "Show symbol documentation")
+		map("n", "<leader>rs", "<cmd>lsp restart<CR>", "Restart LSP")
 	end,
 })
 
-local signs = {
-	[vim.diagnostic.severity.ERROR] = " ",
-	[vim.diagnostic.severity.WARN] = " ",
-	[vim.diagnostic.severity.HINT] = "󰠠 ",
-	[vim.diagnostic.severity.INFO] = " ",
-}
-
+local severity = vim.diagnostic.severity
 vim.diagnostic.config({
-	signs = { text = signs },
+	signs = {
+		text = {
+			[severity.ERROR] = " ",
+			[severity.WARN] = " ",
+			[severity.HINT] = "󰠠 ",
+			[severity.INFO] = " ",
+		},
+	},
 	virtual_text = false,
-	underline = true, -- Always on
+	underline = true,
 	update_in_insert = false,
 	float = {
 		focusable = false,
@@ -66,96 +44,38 @@ vim.diagnostic.config({
 	},
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-local ok, blink = pcall(require, "blink.cmp")
-if ok then
-	capabilities = blink.get_lsp_capabilities(capabilities)
-end
-
-capabilities.textDocument.completion.completionItem = {
-	documentationFormat = { "markdown", "plaintext" },
-	snippetSupport = true,
-	preselectSupport = true,
-	insertReplaceSupport = true,
-	labelDetailsSupport = true,
-	deprecatedSupport = true,
-	commitCharactersSupport = true,
-	tagSupport = { valueSet = { 1 } },
-	resolveSupport = {
-		properties = {
-			"documentation",
-			"detail",
-			"additionalTextEdits",
-		},
-	},
-}
-
 vim.lsp.config("*", {
-	capabilities = capabilities,
+	capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
 
-local vue_language_server_path = vim.fn.expand("$MASON/packages")
-	.. "/vue-language-server"
-	.. "/node_modules/@vue/language-server"
-
-local vue_plugin = {
-	name = "@vue/typescript-plugin",
-	location = vue_language_server_path,
-	languages = { "vue" },
-	configNamespace = "typescript",
-}
-
-vim.lsp.config("vtsls", {
-	settings = {
-		vtsls = {
-			tsserver = {
-				globalPlugins = {
-					vue_plugin,
-				},
-			},
-		},
-	},
-	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-})
+local vue_language_server_path =
+	vim.fs.joinpath(vim.env.MASON, "packages/vue-language-server/node_modules/@vue/language-server")
 
 local servers = {
-	html = {},
+	html = true,
+	pyright = true,
+	clangd = true,
+	jsonls = true,
+	rust_analyzer = true,
+	laravel_ls = true,
+	vue_ls = true,
 	cssls = {
-		filetypes = { "css", "scss", "less" },
-		init_options = { provideFormatter = true },
-		single_file_support = true,
 		settings = {
-			css = {
-				lint = {
-					unknownAtRules = "ignore",
-				},
-				validate = true,
-			},
-			scss = {
-				lint = {
-					unknownAtRules = "ignore",
-				},
-				validate = true,
-			},
-			less = {
-				lint = {
-					unknownAtRules = "ignore",
-				},
-				validate = true,
-			},
+			css = { lint = { unknownAtRules = "ignore" } },
+			scss = { lint = { unknownAtRules = "ignore" } },
+			less = { lint = { unknownAtRules = "ignore" } },
 		},
 	},
 	intelephense = {
 		root_markers = { "index.php", ".git", "composer.json" },
 		filetypes = { "php", "blade" },
 		settings = {
-			files = {
-				associations = { "*.php", "*.blade.php" },
-				maxSize = 1000000,
-			},
-			environment = {
-				includePaths = { "vendor" },
+			intelephense = {
+				files = {
+					associations = { "*.php", "*.blade.php" },
+					maxSize = 1000000,
+				},
+				environment = { includePaths = { "vendor" } },
 			},
 		},
 	},
@@ -190,8 +110,6 @@ local servers = {
 			variables = {},
 		},
 	},
-	pyright = {},
-	clangd = {},
 	tailwindcss = {
 		filetypes = {
 			"html",
@@ -204,19 +122,12 @@ local servers = {
 			"vue",
 			"astro",
 		},
-		init_options = {
-			userLanguages = {
-				astro = "html",
-			},
-		},
+		init_options = { userLanguages = { astro = "html" } },
 	},
-	jsonls = {},
-	gols = {
+	gopls = {
 		settings = {
 			gopls = {
-				analyses = {
-					unusedparams = true,
-				},
+				analyses = { unusedparams = true },
 				staticcheck = true,
 				gofumpt = true,
 			},
@@ -226,16 +137,11 @@ local servers = {
 		settings = {
 			Lua = {
 				runtime = { version = "LuaJIT" },
-				diagnostics = {
-					globals = { "vim" },
-				},
-				completion = {
-					callSnippet = "Replace",
-				},
+				diagnostics = { globals = { "vim" } },
+				completion = { callSnippet = "Replace" },
 				workspace = {
 					library = {
-						vim.fn.expand("$VIMRUNTIME/lua"),
-						vim.fn.stdpath("data") .. "/site/pack/core/opt/ui/nvchad_types",
+						vim.env.VIMRUNTIME .. "/lua",
 						"/usr/share/hypr/stubs",
 						"${3rd}/luv/library",
 					},
@@ -243,23 +149,29 @@ local servers = {
 			},
 		},
 	},
-	-- astro = {
-	-- 	filetypes = { "astro" },
-	-- 	init_options = {
-	-- 		typescript = {
-	-- 			tsdk = vim.fn.stdpath("data")
-	-- 				.. "/mason/packages/typescript-language-server/node_modules/typescript/lib",
-	-- 		},
-	-- 	},
-	-- },
-	rust_analyzer = {},
-	laravel_ls = {},
-	vue_ls = {},
+	vtsls = {
+		filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+		settings = {
+			vtsls = {
+				tsserver = {
+					globalPlugins = {
+						{
+							name = "@vue/typescript-plugin",
+							location = vue_language_server_path,
+							languages = { "vue" },
+							configNamespace = "typescript",
+						},
+					},
+				},
+			},
+		},
+	},
 }
 
 for name, opts in pairs(servers) do
-	vim.lsp.config(name, opts)
-	vim.lsp.enable(name)
+	if type(opts) == "table" then
+		vim.lsp.config(name, opts)
+	end
 end
 
-vim.lsp.enable("phptols")
+vim.lsp.enable(vim.tbl_keys(servers))

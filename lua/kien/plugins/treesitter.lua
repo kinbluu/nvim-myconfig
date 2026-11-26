@@ -1,6 +1,6 @@
 local treesitter = require("nvim-treesitter")
 
-local ensure_installed = {
+local parsers = {
 	"lua",
 	"luadoc",
 	"printf",
@@ -14,24 +14,20 @@ local ensure_installed = {
 	"php_only",
 }
 
-treesitter.install(ensure_installed)
+local function install_parsers()
+	treesitter.install(parsers)
+end
+
+vim.api.nvim_create_user_command("TSInstallAll", install_parsers, { desc = "Install configured Tree-sitter parsers" })
+install_parsers()
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "*",
+	group = vim.api.nvim_create_augroup("KienTreesitter", { clear = true }),
+	desc = "Start Tree-sitter highlighting when a parser is available",
 	callback = function(args)
-		local buf = args.buf
-		local ft = vim.bo[buf].filetype
-
-		local lang = vim.treesitter.language.get_lang(ft)
-		if not lang then
-			return
+		local lang = vim.treesitter.language.get_lang(args.match)
+		if lang and vim.treesitter.language.add(lang) then
+			vim.treesitter.start(args.buf, lang)
 		end
-
-		local ok_add = pcall(vim.treesitter.language.add, lang)
-		if not ok_add then
-			return
-		end
-
-		pcall(vim.treesitter.start, buf, lang)
 	end,
 })

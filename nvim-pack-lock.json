@@ -79,7 +79,8 @@
     },
     "nvim-treesitter": {
       "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
-      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
     },
     "nvim-web-devicons": {
       "rev": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c",
@@ -112,6 +113,10 @@
     "triforce.nvim": {
       "rev": "2e7ff7e2e89021fdb5435f3d3a75e875b24bdaa4",
       "src": "https://github.com/gisketch/triforce.nvim"
+    },
+    "volt": {
+      "rev": "4351c5cd790a0d39491c4d5c75dd62d7db3d3414",
+      "src": "https://github.com/nvzone/volt"
     }
   }
 }
