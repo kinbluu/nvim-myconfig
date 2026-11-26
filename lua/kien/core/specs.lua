@@ -25,13 +25,10 @@ return {
 	gh("nvzone/showkeys"),
 	gh("rachartier/tiny-inline-diagnostic.nvim"),
 	gh("shellRaining/hlchunk.nvim"),
-	gh("nvzone/volt"),
-	gh("nvzone/floaterm"),
 	gh("folke/lazydev.nvim"),
 	{ src = gh("kylechui/nvim-surround"), version = vim.version.range("4.x") },
 	gh("kevinhwang91/promise-async"),
 	gh("nvim-neotest/nvim-nio"),
 	gh("slowy07/mywpm.nvim"),
-	gh("gisketch/triforce.nvim"),
 	gh("folke/tokyonight.nvim"),
 }
