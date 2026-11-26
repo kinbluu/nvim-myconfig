@@ -119,22 +119,22 @@ vim.keymap.set("n", "<leader>e", function()
 		auto_close = true,
 		layout = { preset = "sidebar", preview = false, layout = { position = "left" } },
 	})
-end)
+end, { desc = "Open file explorer" })
 
 vim.keymap.set("n", "<leader><space>", function()
 	snacks.picker.smart()
-end)
+end, { desc = "Find files and buffers" })
 
 vim.keymap.set("n", "<leader>ff", function()
 	snacks.picker.files()
-end)
+end, { desc = "Find files" })
 
 vim.keymap.set("n", "<leader>n", function()
 	snacks.notifier.show_history()
-end)
+end, { desc = "Show notification history" })
 
 vim.keymap.set("n", "<leader>gg", function()
 	snacks.lazygit()
-end)
+end, { desc = "Open LazyGit" })
 
 snacks.scroll.enable()

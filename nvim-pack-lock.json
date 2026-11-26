@@ -115,6 +115,10 @@
       "rev": "efb7edef6789548fd02ac88b8d47b3e344031c53",
       "src": "https://github.com/NvChad/ui",
       "version": "'v3.0'"
+    },
+    "which-key.nvim": {
+      "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "src": "https://github.com/folke/which-key.nvim"
     }
   }
 }

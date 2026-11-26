@@ -18,6 +18,7 @@ return {
 	gh("WhoIsSethDaniel/mason-tool-installer.nvim"),
 	gh("MunifTanjim/nui.nvim"),
 	gh("folke/noice.nvim"),
+	gh("folke/which-key.nvim"),
 	gh("lewis6991/gitsigns.nvim"),
 	gh("NvChad/nvim-colorizer.lua"),
 	{ src = gh("NvChad/ui"), version = "v3.0" },
