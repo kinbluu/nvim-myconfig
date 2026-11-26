@@ -1,8 +1,7 @@
 require("noice").setup({
-	-- UI2 owns the command line and messages. Blink handles completion.
-	cmdline = { enabled = false },
+	cmdline = { enabled = true, view = "cmdline_popup" },
 	messages = { enabled = false },
-	popupmenu = { enabled = false },
+	popupmenu = { enabled = false }, -- Blink anchors its completion menu to the Noice cmdline.
 	lsp = {
 		progress = { enabled = true },
 		override = {

@@ -11,7 +11,7 @@ Gunakan `git status --short` sebelum mengedit dan pertahankan preferensi lokal p
 | Kebutuhan | Lokasi dan tanggung jawab |
 | --- | --- |
 | Opsi, keymap, dan autocmd umum | `lua/kien/configs/` dimuat pertama. Leader adalah spasi. Sorotan yank memakai `TextYankPost` dan `vim.hl.on_yank()`. |
-| Command line, pesan, dan completion | `init.lua` mengaktifkan UI2 eksperimental dengan `msg.targets`. Blink mengelola completion termasuk command line. `lua/kien/plugins/noice.lua` memakai Noice untuk tampilan LSP. |
+| Command line, pesan, dan completion | `lua/kien/plugins/noice.lua` memakai Noice untuk popup command line dan tampilan LSP. Blink menempatkan menu completion di dekat popup Noice. Pesan memakai tampilan bawaan Neovim. |
 | Instalasi dan konfigurasi plugin | `lua/kien/core/specs.lua` mendeklarasikan plugin. `lua/kien/core/pack.lua` memanggil `vim.pack.add()` sebelum memuat modul plugin. Tema dan NvChad UI dimuat berikutnya dari `init.lua`. |
 | Parser dan highlighting | `lua/kien/plugins/treesitter.lua` berbagi satu daftar parser antara startup dan `:TSInstallAll`. Autocmd `FileType` menyalakan highlighting ketika parser tersedia. |
 | LSP, tools, dan formatting | `lua/kien/plugins/lsp/mason.lua` mengelola instalasi. `lua/kien/plugins/lsp/lspconfig.lua` memakai `vim.lsp.config()` dan `vim.lsp.enable()` dengan capabilities Blink. Keymap `LspAttach` bersifat lokal ke buffer dan memakai Snacks untuk picker. Format-on-save ada di `lua/kien/plugins/conform-format.lua`. |
