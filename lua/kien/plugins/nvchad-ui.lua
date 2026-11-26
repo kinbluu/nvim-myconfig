@@ -28,6 +28,14 @@ end
 base46.str_to_cache("tbline", base46.tb_2str(apply_highlights()))
 require("nvchad.tabufline.lazyload")
 
+if config.ui.tabufline.enabled then
+	local tabufline = require("nvchad.tabufline")
+	vim.keymap.set("n", "<leader>b", "<cmd>enew<CR>", { desc = "New buffer" })
+	vim.keymap.set("n", "<Tab>", tabufline.next, { desc = "Next buffer" })
+	vim.keymap.set("n", "<S-Tab>", tabufline.prev, { desc = "Previous buffer" })
+	vim.keymap.set("n", "<leader>x", tabufline.close_buffer, { desc = "Close buffer" })
+end
+
 local function set_statusline()
 	local theme = config.ui.statusline.theme
 	vim.o.statusline = ("%%!v:lua.require('nvchad.stl.%s')()"):format(theme)
